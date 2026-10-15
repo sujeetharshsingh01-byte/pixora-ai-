@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Pixora AI is your creative photo editing studio. Upload, adjust, filter, add text, and export images in your browser.">
+<meta name="theme-color" content="#0b0a12">
+<title>Pixora AI — Your Creative Photo Studio</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Pixora AI home"><span class="brand-mark">✦</span><span>Pixora <em>AI</em></span></a>
+  <nav class="navlinks"><a href="#editor">Editor</a><a href="#features">Features</a><a href="#pricing">Plans</a></nav>
+  <div class="top-actions"><button class="button ghost" id="themeToggle" type="button" aria-label="Toggle theme">☼</button><button class="button primary" id="topUpload" type="button">Start editing ↗</button></div>
+</header>
+
+<main>
+<section class="hero shell">
+  <div class="hero-copy">
+    <div class="pill"><span class="spark">✦</span> YOUR CREATIVE SPACE, REIMAGINED</div>
+    <h1>Every photo has<br>a little <span class="gradient">magic.</span></h1>
+    <p class="hero-text">A simple, creative photo studio right in your browser. Make everyday photos extraordinary with beautiful filters, precise adjustments, and easy exports.</p>
+    <div class="hero-actions"><button class="button primary big" id="heroUpload" type="button">✦ Upload a photo</button><a class="button ghost big" href="#features">Explore features ↓</a></div>
+    <p class="small-note">No account needed for this demo · Your photo stays in your browser</p>
+  </div>
+  <div class="hero-art">
+    <div class="hero-art-glow"></div>
+    <div class="mock-window">
+      <div class="mock-top"><div class="window-dots"><i></i><i></i><i></i></div><span>PIXORA STUDIO</span><span class="ready">● READY</span></div>
+      <div class="mock-image"><div class="abstract-sun"></div><div class="abstract-shape one"></div><div class="abstract-shape two"></div><div class="mock-caption">A new look, one click away.</div></div>
+      <div class="mock-tools"><span>◈ Original</span><span>◐ Vivid</span><span>◑ Warm</span><span>◒ B&W</span></div>
+    </div>
+    <div class="floating-chip chip-one">✧ Creative filters</div><div class="floating-chip chip-two">↗ Ready to export</div>
+  </div>
+</section>
+
+<section class="ad-area shell" aria-label="Advertisement area">
+  <div class="ad-placeholder"><span class="ad-label">ADVERTISEMENT</span><span>Ad space reserved · Connect an approved ad provider after site approval.</span></div>
+</section>
+
+<section class="editor-section shell" id="editor">
+  <div class="section-heading"><div class="eyebrow">THE EDITOR</div><h2>Make it <span class="gradient">your own.</span></h2><p>Upload an image, try the controls, then download your edited result.</p></div>
+  <div class="editor-layout">
+    <aside class="panel upload-panel">
+      <h3>Start with a photo</h3>
+      <label class="dropzone" id="dropzone" for="imageInput"><span class="upload-icon">↑</span><strong>Drop an image here</strong><span>or tap to browse your device</span><small>JPG, PNG, WebP · processed locally</small></label>
+      <input id="imageInput" type="file" accept="image/*" hidden>
+      <div class="control-group"><label for="filterSelect">Filter preset</label><select id="filterSelect"><option value="none">Original</option><option value="vivid">Vivid</option><option value="warm">Warm</option><option value="mono">Black & white</option><option value="dramatic">Dramatic</option><option value="vintage">Vintage</option><option value="cool">Cool</option></select></div>
+      <div class="control-group"><label for="brightness">Brightness <output id="brightnessOut">100%</output></label><input id="brightness" type="range" min="40" max="160" value="100"></div>
+      <div class="control-group"><label for="contrast">Contrast <output id="contrastOut">100%</output></label><input id="contrast" type="range" min="40" max="180" value="100"></div>
+      <div class="control-group"><label for="saturation">Saturation <output id="saturationOut">100%</output></label><input id="saturation" type="range" min="0" max="200" value="100"></div>
+      <div class="control-group"><label for="blur">Soft blur <output id="blurOut">0px</output></label><input id="blur" type="range" min="0" max="5" value="0" step=".5"></div>
+      <div class="control-group ai-box"><label>AI tools</label><p>Remove the photo background using an external AI service.</p><button class="button ai-button" id="removeBgBtn" type="button">✦ Remove background</button><small id="aiStatus">Needs a configured AI API key on the deployed site.</small></div>
+      <div class="control-group"><label for="textOverlay">Add text</label><input id="textOverlay" type="text" maxlength="70" placeholder="Type something..."></div>
+      <div class="control-group"><label for="textColor">Text color</label><input id="textColor" type="color" value="#ffffff" class="color-input"></div>
+      <div class="button-grid"><button class="button ghost" id="rotateBtn" type="button">⤾ Rotate</button><button class="button ghost" id="flipBtn" type="button">↔ Flip</button><button class="button ghost" id="resetBtn" type="button">Reset edits</button><button class="button primary" id="downloadBtn" type="button">Download image ↓</button></div>
+      <p class="status" id="status" aria-live="polite">Upload a photo to start editing.</p>
+    </aside>
+    <div class="canvas-panel">
+      <div class="canvas-toolbar"><span><i class="live-dot"></i> LIVE PREVIEW</span><span id="imageDimensions">No image loaded</span></div>
+      <div class="canvas-stage" id="canvasStage">
+        <div class="empty-state" id="emptyState"><div class="empty-icon">✧</div><h3>Your canvas awaits</h3><p>Choose an image from your device to begin.</p><button class="button primary" id="canvasUpload" type="button">Choose image</button></div>
+        <canvas id="photoCanvas" hidden></canvas>
+      </div>
+      <div class="canvas-footer"><span>✦ Pixora AI Studio</span><span>Edits run locally in your browser</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="features-section shell" id="features">
+  <div class="section-heading"><div class="eyebrow">YOUR TOOLKIT</div><h2>Small tweaks. <span class="gradient">Big difference.</span></h2><p>Useful tools for everyday creativity, with room to grow into a full AI-powered studio.</p></div>
+  <div class="feature-grid">
+    <article class="feature-card"><div class="feature-icon">🎨</div><h3>Creative filters</h3><p>Try vivid, warm, vintage, monochrome, and dramatic looks.</p></article>
+    <article class="feature-card"><div class="feature-icon">☀️</div><h3>Light & color</h3><p>Fine-tune brightness, contrast, saturation, and softness.</p></article>
+    <article class="feature-card"><div class="feature-icon">↻</div><h3>Transform</h3><p>Rotate or flip your image and preview changes instantly.</p></article>
+    <article class="feature-card"><div class="feature-icon">✍️</div><h3>Text overlay</h3><p>Add a simple custom caption and choose its color.</p></article>
+    <article class="feature-card"><div class="feature-icon">💾</div><h3>Export your edit</h3><p>Download the result as a PNG image to your device.</p></article>
+    <article class="feature-card"><div class="feature-icon">🤖</div><h3>AI tools — coming next</h3><p>Background removal, object cleanup, and AI enhancement need a connected AI service.</p></article>
+  </div>
+</section>
+
+<section class="plans-section shell" id="pricing">
+  <div class="plans-card"><div><div class="eyebrow">BUILT TO GROW</div><h2>Free to start. <span class="gradient">Ready for more.</span></h2><p>The core editor works in your browser. Paid plans, accounts, cloud projects, and AI processing can be added as the product grows.</p></div><div class="plans-note"><span class="plans-star">✦</span><strong>Monetization-ready layout</strong><small>Ad slots are placeholders until your site is approved and connected to an ad provider.</small></div></div>
+</section>
+<section class="ad-area shell"><div class="ad-placeholder"><span class="ad-label">ADVERTISEMENT</span><span>Ad space reserved · No ads are served until provider setup and approval.</span></div></section>
+</main>
+<footer class="footer shell"><a class="brand" href="#"><span class="brand-mark">✦</span><span>Pixora <em>AI</em></span></a><span>Creative freedom, one photo at a time.</span><span>© <span id="year"></span> Pixora AI</span></footer>
+<script src="app.js"></script>
+</body>
+</html>
